@@ -6,12 +6,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule, RootStoreConfig } from '@ngrx/store';
 
+import { TodosEffects } from './todos/todos.effects';
+
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
     strictActionImmutability: true,
     strictStateImmutability: true
   }
-}
+};
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ const storeConfig: RootStoreConfig<any> = {
     NxModule.forRoot(),
     StoreModule.forRoot({}, storeConfig),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([
+      TodosEffects
+    ]),
   ]
 })
 export class CoreStateModule {}
