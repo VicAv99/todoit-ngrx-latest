@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@workspace/material": ["libs/material/src/index.ts"]
+      "@workspace/material": ["libs/material/src/index.ts"],
+      "@workspace/core-data": ["libs/core-data/src/index.ts"],
+      "@workspace/core-state": ["libs/core-state/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
