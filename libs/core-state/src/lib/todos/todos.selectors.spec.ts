@@ -1,4 +1,4 @@
-import { Todo } from './todo.model';
+import { Todo } from '@workspace/core-data';
 import { State, todosAdapter, initialState } from './todos.reducer';
 import * as TodosSelectors from './todos.selectors';
 

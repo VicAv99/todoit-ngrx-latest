@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { TodosService } from './todos/todos.service';
+import { NotifyService } from './shared/notify/notify.service';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [HttpClientModule],
+  providers: [
+    TodosService,
+    // Shared Services
+    NotifyService
+  ],
 })
 export class CoreDataModule {}

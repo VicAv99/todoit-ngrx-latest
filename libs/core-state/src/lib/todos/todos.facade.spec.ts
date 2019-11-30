@@ -7,7 +7,7 @@ import { StoreModule, Store } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
-import { Todo } from './todo.model';
+import { Todo } from '@workspace/core-data';
 import { TodosEffects } from './todos.effects';
 import { TodosFacade } from './todos.facade';
 

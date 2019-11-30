@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as TodosActions from './todos.actions';
-import { Todo } from './todo.model';
+import { Todo } from '@workspace/core-data';
 
 export const TODOS_FEATURE_KEY = 'todos';
 
