@@ -22,7 +22,10 @@
             "tsConfig": "apps/todoit/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/todoit/src/favicon.ico", "apps/todoit/src/assets"],
-            "styles": ["apps/todoit/src/styles.scss"],
+            "styles": [
+              "apps/todoit/src/styles.scss",
+              "libs/theme/_material.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -118,6 +121,37 @@
             "tsConfig": ["apps/todoit-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/todoit-e2e/**"]
           }
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material/jest.config.js",
+            "tsConfig": "libs/material/tsconfig.spec.json",
+            "setupFile": "libs/material/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }
