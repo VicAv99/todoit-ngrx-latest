@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CoreDataModule } from '@workspace/core-data';
 import { CoreStateModule } from '@workspace/core-state';
 import { MaterialModule } from '@workspace/material';
+import { UiToolbarModule } from '@workspace/ui-toolbar';
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { TodosDetailsComponent } from './todos/todos-details/todos-details.compo
     CoreDataModule,
     CoreStateModule,
     MaterialModule,
+    UiToolbarModule,
     RoutingModule
   ],
   providers: [],

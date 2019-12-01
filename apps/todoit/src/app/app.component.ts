@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'todoit';
+  links = [{path: '/todos', icon: 'loyalty', label: 'TODOS'}];
 }
