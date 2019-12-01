@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreDataModule } from '@workspace/core-data';
 import { CoreStateModule } from '@workspace/core-state';
@@ -16,6 +17,8 @@ import { TodosDetailsComponent } from './todos/todos-details/todos-details.compo
   declarations: [AppComponent, TodosComponent, TodosListComponent, TodosDetailsComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     CoreDataModule,
     CoreStateModule,
     MaterialModule,

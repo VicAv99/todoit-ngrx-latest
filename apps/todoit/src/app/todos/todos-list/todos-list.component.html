@@ -1,1 +1,11 @@
-<p>todos-list works!</p>
+<mat-card class="mt-3">
+  <h4 mat-subheader>Todos</h4>
+  <mat-action-list>
+    <mat-list-item *ngFor="let todo of todos" (click)="select(todo)" class="mat-list-option">
+      <span mat-line>{{todo.description}}</span>
+      <button mat-icon-button type="button" (click)="delete(todo, $event)" class="mat-pseudo-checkbox">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-action-list>
+</mat-card>
