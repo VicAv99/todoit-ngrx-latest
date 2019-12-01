@@ -21,8 +21,6 @@ export class TodosDetailsComponent {
 
   save() {
     this.saved.emit(this.group.value);
-    this.group.reset();
-    this.selectedTodo = {} as Todo;
   }
 
   cancel() {

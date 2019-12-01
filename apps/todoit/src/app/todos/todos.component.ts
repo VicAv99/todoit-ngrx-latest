@@ -25,6 +25,7 @@ export class TodosComponent implements OnInit {
     this.todosFacade.loadTodos();
     this.todo$ = this.todosFacade.selectedTodo$;
     this.todos$ = this.todosFacade.allTodos$;
+    this.todosFacade.mutations$.subscribe(() => this.reset());
     this.initForm();
   }
 

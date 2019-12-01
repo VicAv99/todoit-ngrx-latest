@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { filter } from 'rxjs/operators';
+import { select, Store, Action, ActionsSubject } from '@ngrx/store';
 
 import { Todo } from '@workspace/core-data';
 import * as fromTodos from './todos.reducer';
@@ -12,8 +13,16 @@ export class TodosFacade {
   loading$ = this.store.pipe(select(TodosSelectors.todosLoading));
   allTodos$ = this.store.pipe(select(TodosSelectors.getAllTodos));
   selectedTodo$ = this.store.pipe(select(TodosSelectors.getSelected));
+  mutations$ = this.actions$
+    .pipe(
+      filter(action =>
+        action.type === todoActions.createTodo({todo: null}).type
+        || action.type === todoActions.updateTodo({todo: null}).type
+        || action.type === todoActions.deleteTodo({todo: null}).type
+      )
+    );
 
-  constructor (private store: Store<fromTodos.TodosPartialState>) { }
+  constructor (private store: Store<fromTodos.TodosPartialState>, private actions$: ActionsSubject) { }
 
   selectTodo(todoId: string) {
     this.dispatch(todoActions.todoSelected({ selectedId: todoId }));
