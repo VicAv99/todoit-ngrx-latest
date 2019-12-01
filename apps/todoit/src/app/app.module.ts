@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { CoreDataModule } from '@workspace/core-data';
+import { CoreStateModule } from '@workspace/core-state';
 import { MaterialModule } from '@workspace/material';
 
 import { AppComponent } from './app.component';
@@ -9,6 +11,8 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    CoreDataModule,
+    CoreStateModule,
     MaterialModule
   ],
   providers: [],

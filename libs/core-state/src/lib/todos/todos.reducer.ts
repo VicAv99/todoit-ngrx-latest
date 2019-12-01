@@ -8,8 +8,7 @@ export const TODOS_FEATURE_KEY = 'todos';
 
 export interface State extends EntityState<Todo> {
   selectedId?: string | number; // which Todos record has been selected
-  loaded: boolean; // has the Todos list been loaded
-  error?: string | null; // last none error (if any)
+  isLoading: boolean; // has the Todos list been loaded
 }
 
 export interface TodosPartialState {
@@ -20,20 +19,35 @@ export const todosAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: State = todosAdapter.getInitialState({
   // set initial required properties
-  loaded: false
+  isLoading: false
 });
 
 const todosReducer = createReducer(
   initialState,
-  on(TodosActions.loadTodos, state => ({
+  on(TodosActions.todoSelected, (state, {selectedId}) =>
+    Object.assign({}, state, {selectedId})),
+  on(
+    TodosActions.loadTodos,
+    TodosActions.createTodo,
+    TodosActions.updateTodo,
+    TodosActions.deleteTodo,
+    state => ({
     ...state,
-    loaded: false,
+    isLoading: true,
     error: null
   })),
-  on(TodosActions.loadTodosSuccess, (state, { todos }) =>
-    todosAdapter.addAll(todos, { ...state, loaded: true })
+  on(TodosActions.todosLoaded, (state, { todos }) =>
+    todosAdapter.addAll(todos, state)
   ),
-  on(TodosActions.loadTodosFailure, (state, { error }) => ({ ...state, error }))
+  on(TodosActions.todoCreated, (state, { todo }) =>
+    todosAdapter.addOne(todo, state)
+  ),
+  on(TodosActions.todoUpdated, (state, { todo }) =>
+    todosAdapter.upsertOne(todo, state)
+  ),
+  on(TodosActions.todoDeleted, (state, { todo }) =>
+    todosAdapter.removeOne(todo.id, state)
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

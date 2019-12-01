@@ -7,20 +7,14 @@ import {
 } from './todos.reducer';
 
 // Lookup the 'Todos' feature state managed by NgRx
-export const getTodosState = createFeatureSelector<TodosPartialState, State>(
-  TODOS_FEATURE_KEY
-);
+export const getTodosState = createFeatureSelector<TodosPartialState, State>(TODOS_FEATURE_KEY);
 
+// Adapter Selectors
 const { selectAll, selectEntities } = todosAdapter.getSelectors();
 
-export const getTodosLoaded = createSelector(
+export const todosLoading = createSelector(
   getTodosState,
-  (state: State) => state.loaded
-);
-
-export const getTodosError = createSelector(
-  getTodosState,
-  (state: State) => state.error
+  (state: State) => state.isLoading
 );
 
 export const getAllTodos = createSelector(
