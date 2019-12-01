@@ -7,9 +7,9 @@ import * as fromTodos from './todos.reducer';
 import * as todoActions from './todos.actions';
 import * as TodosSelectors from './todos.selectors';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class TodosFacade {
-  loaded$ = this.store.pipe(select(TodosSelectors.todosLoading));
+  loading$ = this.store.pipe(select(TodosSelectors.todosLoading));
   allTodos$ = this.store.pipe(select(TodosSelectors.getAllTodos));
   selectedTodo$ = this.store.pipe(select(TodosSelectors.getSelected));
 

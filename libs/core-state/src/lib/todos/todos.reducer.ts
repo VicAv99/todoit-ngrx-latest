@@ -12,7 +12,7 @@ export interface State extends EntityState<Todo> {
 }
 
 export interface TodosPartialState {
-  readonly [TODOS_FEATURE_KEY]: State;
+  readonly [ TODOS_FEATURE_KEY ]: State;
 }
 
 export const todosAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
@@ -24,29 +24,28 @@ export const initialState: State = todosAdapter.getInitialState({
 
 const todosReducer = createReducer(
   initialState,
-  on(TodosActions.todoSelected, (state, {selectedId}) =>
-    Object.assign({}, state, {selectedId})),
+  on(TodosActions.todoSelected, (state, { selectedId }) =>
+    Object.assign({}, state, { selectedId })),
   on(
     TodosActions.loadTodos,
     TodosActions.createTodo,
     TodosActions.updateTodo,
     TodosActions.deleteTodo,
     state => ({
-    ...state,
-    isLoading: true,
-    error: null
-  })),
+      ...state,
+      isLoading: true
+    })),
   on(TodosActions.todosLoaded, (state, { todos }) =>
-    todosAdapter.addAll(todos, state)
+    todosAdapter.addAll(todos, { ...state, isLoading: false })
   ),
   on(TodosActions.todoCreated, (state, { todo }) =>
-    todosAdapter.addOne(todo, state)
+    todosAdapter.addOne(todo, { ...state, isLoading: false })
   ),
   on(TodosActions.todoUpdated, (state, { todo }) =>
-    todosAdapter.upsertOne(todo, state)
+    todosAdapter.upsertOne(todo, { ...state, isLoading: false })
   ),
   on(TodosActions.todoDeleted, (state, { todo }) =>
-    todosAdapter.removeOne(todo.id, state)
+    todosAdapter.removeOne(todo.id, { ...state, isLoading: false })
   )
 );
 
