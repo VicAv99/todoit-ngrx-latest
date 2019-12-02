@@ -12,9 +12,10 @@ import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
 import { TodosListComponent } from './todos/todos-list/todos-list.component';
 import { TodosDetailsComponent } from './todos/todos-details/todos-details.component';
+import { TodosViewComponent } from './todos/todos-view/todos-view.component';
 
 @NgModule({
-  declarations: [AppComponent, TodosComponent, TodosListComponent, TodosDetailsComponent],
+  declarations: [AppComponent, TodosComponent, TodosListComponent, TodosDetailsComponent, TodosViewComponent],
   imports: [
     BrowserModule,
     FormsModule,

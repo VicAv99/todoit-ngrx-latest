@@ -5,9 +5,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { NxModule, DataPersistence } from '@nrwl/angular';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule, RootStoreConfig } from '@ngrx/store';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 
 import { reducers } from '.';
 import { TodosEffects } from './todos/todos.effects';
+import { RouterEffects } from './router/router.effects';
 
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
@@ -21,8 +23,10 @@ const storeConfig: RootStoreConfig<any> = {
     CommonModule,
     NxModule.forRoot(),
     StoreModule.forRoot(reducers, storeConfig),
-    StoreDevtoolsModule.instrument({ maxAge: 10 }),
+    StoreDevtoolsModule.instrument({ name: 'NgRx TODO App', maxAge: 25 }),
+    StoreRouterConnectingModule.forRoot({routerState: RouterState.Minimal}),
     EffectsModule.forRoot([
+      RouterEffects,
       TodosEffects
     ]),
   ],

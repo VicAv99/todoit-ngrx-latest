@@ -19,6 +19,10 @@ export class TodosService {
     return this.httpClient.get<Todo[]>(this.getUrl());
   }
 
+  findOne(todoId: string): Observable<Todo> {
+    return this.httpClient.get<Todo>(this.getUrlWithId(todoId));
+  }
+
   create(todo: Todo): Observable<Todo> {
     return this.httpClient.post<Todo>(this.getUrl(), todo);
   }

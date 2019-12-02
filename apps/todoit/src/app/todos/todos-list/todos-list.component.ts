@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Todo } from '@workspace/core-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'workspace-todos-list',
@@ -12,10 +13,15 @@ export class TodosListComponent {
   @Output() deleted = new EventEmitter();
   @Output() selected = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   select(todo: Todo) {
     this.selected.emit(todo);
+  }
+
+  viewItem(todo: Todo, event: any) {
+    event.stopImmediatePropagation();
+    this.router.navigate(['/todos', todo.id]);
   }
 
   delete(todo: Todo, event: any) {

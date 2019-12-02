@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
+import { map, tap, switchMap, filter, withLatestFrom } from 'rxjs/operators';
 import { DataPersistence } from '@nrwl/angular';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as TodosActions from './todos.actions';
 import { TodosPartialState } from './todos.reducer';
 import { TodosService, Todo, NotifyService } from '@workspace/core-data';
+import { ROUTER_NAVIGATION, ROUTER_REQUEST, ROUTER_NAVIGATED } from '@ngrx/router-store';
+import { of, iif, EMPTY } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '..';
+import { selectRouteId } from '../router/router.selectors';
 
 @Injectable()
 export class TodosEffects {
@@ -23,6 +28,19 @@ export class TodosEffects {
         return this.notificationService.notify(error, 'Error');
       }
     })
+  );
+
+  loadTodo$ = createEffect(() =>
+    this.dataPersistence.actions.pipe(
+      ofType(ROUTER_NAVIGATED),
+      withLatestFrom(this.store.select(selectRouteId)),
+      filter(([{}, routeId]) => !!routeId),
+      switchMap(([{}, routeId]) =>
+        this.todosService.findOne(routeId).pipe(
+          map(todo => TodosActions.todoSelected({selectedId: todo.id}))
+        )
+      )
+    )
   );
 
   addTodo$ = createEffect(() =>
@@ -79,6 +97,7 @@ export class TodosEffects {
   constructor (
     private actions$: Actions,
     private dataPersistence: DataPersistence<TodosPartialState>,
+    private store: Store<AppState>,
     private todosService: TodosService,
     private notificationService: NotifyService
   ) { }

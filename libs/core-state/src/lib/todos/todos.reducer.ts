@@ -19,6 +19,7 @@ export const todosAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: State = todosAdapter.getInitialState({
   // set initial required properties
+  selectedId: null,
   isLoading: false
 });
 

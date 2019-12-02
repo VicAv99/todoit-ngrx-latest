@@ -3,6 +3,9 @@
   <mat-action-list>
     <mat-list-item *ngFor="let todo of todos" (click)="select(todo)" class="mat-list-option">
       <span mat-line>{{todo.description}}</span>
+      <button mat-icon-button type="button" (click)="viewItem(todo, $event)" class="mat-pseudo-checkbox">
+        <mat-icon>more_vert</mat-icon>
+      </button>
       <button mat-icon-button type="button" (click)="delete(todo, $event)" class="mat-pseudo-checkbox">
         <mat-icon>clear</mat-icon>
       </button>
